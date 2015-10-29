@@ -9,13 +9,13 @@ module.exports = function(config) {
     frameworks: ['mocha', 'chai'],
 
     files: [
-      'src/**/*.spec.js',
+      'bundle.spec.js',
     ],
 
     exclude: [],
 
     preprocessors: {
-      'src/**/*.spec.js': ['webpack'],
+      'bundle.spec.js': ['webpack', 'sourcemap'],
     },
 
     webpack: {

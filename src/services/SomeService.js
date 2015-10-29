@@ -1,7 +1,9 @@
 export default class SomeService {
 
-  constructor($log) {
+  constructor($log, $http, $q) {
     this.$log = $log;
+    this.$http = $http;
+    this.$q = $q;
 
     /////
     this.activate();
@@ -22,6 +24,18 @@ export default class SomeService {
   setName(name) {
     this.name = name;
   }
+
+  doAction(id) {
+    return this.$http.get(`/api/entity/${id}/action`)
+      .then(res => {
+        this.item = res.data;
+      });
+  }
+
+  withQ(arr) {
+    let promises = arr.map(id => this.doAction(id));
+    return this.$q.all(promises);
+  }
 }
 
-SomeService.$inject = ['$log'];
+SomeService.$inject = ['$log', '$http', '$q'];

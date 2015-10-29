@@ -7,6 +7,10 @@ Angular 1 with ES2015 setup.
 * Test: karma + mocha + chai
 * Code coverage: istabul (isparta)
 
+## Issues
+* Commitizen not work, no idea.
+
+
 <!-- Copyright (c) 2015 Ha Pham
 
 Permission is hereby granted, free of charge, to any person obtaining a
