@@ -27,8 +27,11 @@ module.exports = function(config) {
           },
           {
             test: /\.js$/,
-            loader: 'babel?optional[]=runtime',
+            loader: 'babel',
             exclude: /node_modules/,
+            query: {
+              presets: ['es2015'],
+            }
           },
           {
             test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
