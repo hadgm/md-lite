@@ -1,4 +1,3 @@
-import {expect} from  'chai';
 import {SomeService} from './SomeService.ts';
 
 describe('SomeService', function() {
@@ -13,13 +12,13 @@ describe('SomeService', function() {
   }));
 
   it('should say its name', () => {
-    expect(service.getName()).to.equal('SomeService');
+    expect(service.getName()).toBe('SomeService');
   });
 
   it('should set name', () => {
     let name = 'a name';
     service.setName(name);
-    expect(service.getName()).to.equal(name);
+    expect(service.getName()).toBe(name);
   });
 
   it('should send request', (done) => {
@@ -37,8 +36,8 @@ describe('SomeService', function() {
 
     service.doAction(123)
       .then(res => {
-        expect(service.item).to.exist;
-        expect(service.item).to.eql({
+        expect(service.item).toBeDefined;
+        expect(service.item).toEqual({
           entity: 123,
           controller: 'action',
         });
@@ -62,7 +61,11 @@ describe('SomeService', function() {
       });
 
     service.withQ([123, 124]).then(res => {
-      expect(res).to.be.an('array');
+      expect(res).toEqual(jasmine.any(Array));
+      expect(res[0]).toEqual({
+        entity: 123,
+        controller: 'action',
+      });
       done();
     });
 

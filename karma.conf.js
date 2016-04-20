@@ -6,7 +6,7 @@ module.exports = function(config) {
 
     basePath: '',
 
-    frameworks: ['mocha', 'chai'],
+    frameworks: ['jasmine'],
 
     files: [
       'bundle.spec.js',
@@ -88,9 +88,8 @@ module.exports = function(config) {
 
     plugins: [
       'karma-webpack',
-      'karma-mocha',
+      'karma-jasmine',
       'karma-mocha-reporter',
-      'karma-chai',
       'karma-chrome-launcher',
       'karma-coverage',
       'karma-sourcemap-loader',
