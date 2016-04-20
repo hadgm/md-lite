@@ -1,7 +1,9 @@
-import home from './home.module.js';
-import HomeController from './HomeController.js';
+import home from './home.module.ts';
+import {HomeController} from './HomeController.ts';
+import {expect} from 'chai';
 
-module = window.module;
+declare const window: any;
+const module = window.module;
 
 describe('Home Component', () => {
 
@@ -11,7 +13,7 @@ describe('Home Component', () => {
   beforeEach(module(home));
 
   beforeEach(inject((_$rootScope_, _$log_) => {
-    $rootScope = _$rootScope_;
+    $rootScope = _$rootScope_.$new();
     $log = _$log_;
   }));
 
@@ -19,6 +21,7 @@ describe('Home Component', () => {
 
     let controller;
     beforeEach(() => {
+
       controller = new HomeController($log);
     });
 
@@ -34,14 +37,14 @@ describe('Home Component', () => {
 
     beforeEach(inject(($compile) => {
       element = angular.element('<home></home>');
-      $compile(element, $rootScope);
+      $compile(element)($rootScope);
       scope = element.isolateScope();
 
       $rootScope.$digest();
     }));
 
     it('should compile', () => {
-      expect(element[0].children[0].textContent).to.equal('home');
+      expect(element[0].children[0].textContent).to.equal('Home');
     });
 
   });

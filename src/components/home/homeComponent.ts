@@ -1,9 +1,9 @@
-import HomeController from './HomeController.js';
+import {HomeController} from './HomeController.ts';
 
 export default function homeComponent() {
   return {
     restrict: 'EA',
-    template: `<span>home</span>`,
+    template: `<span>{{home.title}}</span>`,
     controller: HomeController,
     controllerAs: 'home',
   };
