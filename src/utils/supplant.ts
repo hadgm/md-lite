@@ -1,3 +1,7 @@
+/**
+ * supplant() method from Crockford's `Remedial Javascript`
+ */
+
 export function supplant(template, values, pattern = /\{([^\{\}]*)\}/g) {
   return template.replace(pattern, function(a, b) {
     let p = b.split('.'),

@@ -63,161 +63,161 @@ describe('layout directives', function() {
 
   });
 
-  describe('using [flex] attributes', function() {
-    let allowedValues = [
-      'grow', 'initial', 'auto', 'none',
-      0, 5, 10, 15, 20, 25,
-      30, 33, 34, 35, 40, 45,
-      50, 55, 60, 65, 66, 67,
-      70, 75, 80, 85, 90, 95, 100,
-    ];
+  // describe('using [flex] attributes', function() {
+  //   let allowedValues = [
+  //     'grow', 'initial', 'auto', 'none',
+  //     0, 5, 10, 15, 20, 25,
+  //     30, 33, 34, 35, 40, 45,
+  //     50, 55, 60, 65, 66, 67,
+  //     70, 75, 80, 85, 90, 95, 100,
+  //   ];
 
-    it('should support attribute without value "<div flex>"', function() {
-      let element = $compile('<div flex>Layout</div>')(pageScope);
-      expect(element.hasClass('flex')).toBeTruthy();
-      expect(element.hasClass('flex-flex')).toBeFalsy();
-    });
+  //   it('should support attribute without value "<div flex>"', function() {
+  //     let element = $compile('<div flex>Layout</div>')(pageScope);
+  //     expect(element.hasClass('flex')).toBeTruthy();
+  //     expect(element.hasClass('flex-flex')).toBeFalsy();
+  //   });
 
-    it('should ignore invalid values non-numericals like flex="flex"', function() {
-      let element = $compile('<div flex="flex">Layout</div>')(pageScope);
-      expect(element.hasClass('flex')).toBeTruthy();
-      expect(element.hasClass('flex-flex')).toBeFalsy();
-    });
+  //   it('should ignore invalid values non-numericals like flex="flex"', function() {
+  //     let element = $compile('<div flex="flex">Layout</div>')(pageScope);
+  //     expect(element.hasClass('flex')).toBeTruthy();
+  //     expect(element.hasClass('flex-flex')).toBeFalsy();
+  //   });
 
-    it('should support interpolated values flex-gt-sm="{{columnSize}}"', function() {
-      let scope = pageScope,
-        element = $compile('<div flex-gt-sm="{{columnSize}}">Layout</div>')(scope);
+  //   it('should support interpolated values flex-gt-sm="{{columnSize}}"', function() {
+  //     let scope = pageScope,
+  //       element = $compile('<div flex-gt-sm="{{columnSize}}">Layout</div>')(scope);
 
-      scope.$apply('columnSize = 33');
-      expect(element.hasClass('flex-gt-sm-33')).toBeTruthy();
+  //     scope.$apply('columnSize = 33');
+  //     expect(element.hasClass('flex-gt-sm-33')).toBeTruthy();
 
-      scope.$apply('columnSize = undefined');
-      expect(element.hasClass('flex-gt-sm')).toBeTruthy();
-    });
+  //     scope.$apply('columnSize = undefined');
+  //     expect(element.hasClass('flex-gt-sm')).toBeTruthy();
+  //   });
 
-    it('should observe the attribute value and update the layout class(es)', inject(function($rootScope, $compile_) {
-      let scope = pageScope;
-      let element = angular.element($compile_('<div flex-gt-md="{{size}}"></div>')(scope));
+  //   it('should observe the attribute value and update the layout class(es)', inject(function($rootScope, $compile_) {
+  //     let scope = pageScope;
+  //     let element = angular.element($compile_('<div flex-gt-md="{{size}}"></div>')(scope));
 
-      expect(element.hasClass('flex-gt-md')).toBe(true);
-      expect(element.hasClass('flex-gt-md-size')).toBe(false);
+  //     expect(element.hasClass('flex-gt-md')).toBe(true);
+  //     expect(element.hasClass('flex-gt-md-size')).toBe(false);
 
-      scope.$apply(function() {
-        scope.size = 32;
-      });
+  //     scope.$apply(function() {
+  //       scope.size = 32;
+  //     });
 
-      expect(element.hasClass('flex-gt-md-32')).toBe(true);
+  //     expect(element.hasClass('flex-gt-md-32')).toBe(true);
 
-      scope.$apply(function() {
-        // This should be rejected/ignored and the fallback "" value used
-        scope.size = 'fishCheeks';
-      });
+  //     scope.$apply(function() {
+  //       // This should be rejected/ignored and the fallback "" value used
+  //       scope.size = 'fishCheeks';
+  //     });
 
-      expect(element.hasClass('flex-gt-md')).toBe(true);
-      expect(element.hasClass('flex-gt-md-fishCheeks')).toBe(false);
-    }));
+  //     expect(element.hasClass('flex-gt-md')).toBe(true);
+  //     expect(element.hasClass('flex-gt-md-fishCheeks')).toBe(false);
+  //   }));
 
-    testAllSuffixesWithValues('flex', allowedValues);
-  });
+  //   testAllSuffixesWithValues('flex', allowedValues);
+  // });
 
-  describe('using [flex-order] attributes', function() {
-    let flexOrderValues = [
-      -9, -8, -7, -6, -5, -4, -3, -2, -1,
-      0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-    ];
+  // describe('using [flex-order] attributes', function() {
+  //   let flexOrderValues = [
+  //     -9, -8, -7, -6, -5, -4, -3, -2, -1,
+  //     0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+  //   ];
 
-    it('should support attribute without value "<div flex-order>"', function() {
-      let element = $compile('<div flex-order>Layout</div>')(pageScope);
-      expect(element.hasClass('flex-order-0')).toBeTruthy();
-      expect(element.hasClass('flex-order')).toBeFalsy();
-    });
+  //   it('should support attribute without value "<div flex-order>"', function() {
+  //     let element = $compile('<div flex-order>Layout</div>')(pageScope);
+  //     expect(element.hasClass('flex-order-0')).toBeTruthy();
+  //     expect(element.hasClass('flex-order')).toBeFalsy();
+  //   });
 
-    it('should ignore invalid values non-numericals like flex-order="humpty"', function() {
-      let element = $compile('<div flex-order="humpty">Layout</div>')(pageScope);
-      expect(element.hasClass('flex-order-0')).toBeTruthy();
-      expect(element.hasClass('flex-order-humpty')).toBeFalsy();
-    });
+  //   it('should ignore invalid values non-numericals like flex-order="humpty"', function() {
+  //     let element = $compile('<div flex-order="humpty">Layout</div>')(pageScope);
+  //     expect(element.hasClass('flex-order-0')).toBeTruthy();
+  //     expect(element.hasClass('flex-order-humpty')).toBeFalsy();
+  //   });
 
-    it('should support interpolated values flex-order-gt-sm="{{index}}"', function() {
-      let scope = pageScope,
-        element = $compile('<div flex-order-gt-sm="{{index}}">Layout</div>')(scope);
+  //   it('should support interpolated values flex-order-gt-sm="{{index}}"', function() {
+  //     let scope = pageScope,
+  //       element = $compile('<div flex-order-gt-sm="{{index}}">Layout</div>')(scope);
 
-      scope.$apply('index = 3');
-      expect(element.hasClass('flex-order-gt-sm-3')).toBeTruthy();
-    });
+  //     scope.$apply('index = 3');
+  //     expect(element.hasClass('flex-order-gt-sm-3')).toBeTruthy();
+  //   });
 
-    testAllSuffixesWithValues('flex-order', flexOrderValues);
-  });
+  //   testAllSuffixesWithValues('flex-order', flexOrderValues);
+  // });
 
-  describe('using [flex-offset] attributes', function() {
-    let offsetValues = [
-      5, 10, 15, 20, 25,
-      30, 35, 40, 45, 50,
-      55, 60, 65, 70, 75,
-      80, 85, 90, 95,
-      33, 34, 66, 67,
-    ];
+  // describe('using [flex-offset] attributes', function() {
+  //   let offsetValues = [
+  //     5, 10, 15, 20, 25,
+  //     30, 35, 40, 45, 50,
+  //     55, 60, 65, 70, 75,
+  //     80, 85, 90, 95,
+  //     33, 34, 66, 67,
+  //   ];
 
-    it('should support attribute without value "<div flex-offset>"', function() {
-      let element = $compile('<div flex-offset>Layout</div>')(pageScope);
-      expect(element.hasClass('flex-offset-0')).toBeTruthy();
-      expect(element.hasClass('flex-offset')).toBeFalsy();
-    });
+  //   it('should support attribute without value "<div flex-offset>"', function() {
+  //     let element = $compile('<div flex-offset>Layout</div>')(pageScope);
+  //     expect(element.hasClass('flex-offset-0')).toBeTruthy();
+  //     expect(element.hasClass('flex-offset')).toBeFalsy();
+  //   });
 
-    it('should ignore invalid values non-numericals like flex-offset="humpty"', function() {
-      let element = $compile('<div flex-offset="humpty">Layout</div>')(pageScope);
-      expect(element.hasClass('flex-offset-0')).toBeTruthy();
-      expect(element.hasClass('flex-offset-humpty')).toBeFalsy();
-    });
+  //   it('should ignore invalid values non-numericals like flex-offset="humpty"', function() {
+  //     let element = $compile('<div flex-offset="humpty">Layout</div>')(pageScope);
+  //     expect(element.hasClass('flex-offset-0')).toBeTruthy();
+  //     expect(element.hasClass('flex-offset-humpty')).toBeFalsy();
+  //   });
 
-    it('should support interpolated values flex-offset-gt-sm="{{padding}}"', function() {
-      let scope = pageScope,
-        element = $compile('<div flex-offset-gt-sm="{{padding}}">Layout</div>')(scope);
+  //   it('should support interpolated values flex-offset-gt-sm="{{padding}}"', function() {
+  //     let scope = pageScope,
+  //       element = $compile('<div flex-offset-gt-sm="{{padding}}">Layout</div>')(scope);
 
-      scope.$apply('padding = 15');
-      expect(element.hasClass('flex-offset-gt-sm-15')).toBeTruthy();
-    });
+  //     scope.$apply('padding = 15');
+  //     expect(element.hasClass('flex-offset-gt-sm-15')).toBeTruthy();
+  //   });
 
-    testAllSuffixesWithValues('flex-offset', offsetValues);
-  });
+  //   testAllSuffixesWithValues('flex-offset', offsetValues);
+  // });
 
-  describe('using [layout-align] attributes', function() {
-    let attrName = 'layout-align';
-    let alignmentValues = [
-      'start start', 'start center', 'start end',
-      'center stretch', 'center start', 'center center', 'center end',
-      'end stretch', 'end center', 'end start', 'end end',
-      'space-around stretch', 'space-around start', 'space-around center', 'space-around end',
-      'space-between stretch', 'space-between start', 'space-between center', 'space-between end',
-    ];
+  // describe('using [layout-align] attributes', function() {
+  //   let attrName = 'layout-align';
+  //   let alignmentValues = [
+  //     'start start', 'start center', 'start end',
+  //     'center stretch', 'center start', 'center center', 'center end',
+  //     'end stretch', 'end center', 'end start', 'end end',
+  //     'space-around stretch', 'space-around start', 'space-around center', 'space-around end',
+  //     'space-between stretch', 'space-between start', 'space-between center', 'space-between end',
+  //   ];
 
-    it('should support attribute without value "<div layout-align>"', function() {
-      let markup = supplant('<div {0}>Layout</div>', [attrName]);
-      let element = $compile(markup)(pageScope);
+  //   it('should support attribute without value "<div layout-align>"', function() {
+  //     let markup = supplant('<div {0}>Layout</div>', [attrName]);
+  //     let element = $compile(markup)(pageScope);
 
-      expect(element.hasClass(attrName + '-start-stretch')).toBeTruthy();
-      expect(element.hasClass(attrName)).toBeFalsy();
-    });
+  //     expect(element.hasClass(attrName + '-start-stretch')).toBeTruthy();
+  //     expect(element.hasClass(attrName)).toBeFalsy();
+  //   });
 
-    it('should ignore invalid values non-numericals like layout-align="humpty"', function() {
-      let markup = supplant('<div {0}="humpty">Layout</div>', [attrName]);
-      let element = $compile(markup)(pageScope);
+  //   it('should ignore invalid values non-numericals like layout-align="humpty"', function() {
+  //     let markup = supplant('<div {0}="humpty">Layout</div>', [attrName]);
+  //     let element = $compile(markup)(pageScope);
 
-      expect(element.hasClass(attrName + '-start-stretch')).toBeTruthy();
-      expect(element.hasClass(attrName + '-humpty')).toBeFalsy();
-    });
+  //     expect(element.hasClass(attrName + '-start-stretch')).toBeTruthy();
+  //     expect(element.hasClass(attrName + '-humpty')).toBeFalsy();
+  //   });
 
-    it('should support interpolated values layout-align-gt-sm="{{alignItems}}"', function() {
-      let scope = pageScope,
-        markup = supplant('<div {0}-gt-sm="{{alignItems}}">Layout</div>', [attrName]),
-        element = $compile(markup)(scope);
+  //   it('should support interpolated values layout-align-gt-sm="{{alignItems}}"', function() {
+  //     let scope = pageScope,
+  //       markup = supplant('<div {0}-gt-sm="{{alignItems}}">Layout</div>', [attrName]),
+  //       element = $compile(markup)(scope);
 
-      scope.$apply('alignItems = "center center"');
-      expect(element.hasClass(attrName + '-gt-sm-center-center')).toBeTruthy();
-    });
+  //     scope.$apply('alignItems = "center center"');
+  //     expect(element.hasClass(attrName + '-gt-sm-center-center')).toBeTruthy();
+  //   });
 
-    testAllSuffixesWithValues(attrName, alignmentValues);
-  });
+  //   testAllSuffixesWithValues(attrName, alignmentValues);
+  // });
 
   describe('using [layout-] padding, fill, margin, wrap, and nowrap attributes', function() {
     let allowedAttrsNoValues = [

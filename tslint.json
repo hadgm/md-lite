@@ -116,6 +116,7 @@
       "check-format",
       "allow-leading-underscore",
       "allow-trailing-underscore",
+      "allow-pascal-case",
       "ban-keywords"
     ],
     "whitespace": [
