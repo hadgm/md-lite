@@ -31,7 +31,12 @@ module.exports = function(config) {
             exclude: /node_modules/,
             query: {
               presets: ['es2015'],
-            }
+            },
+          },
+          {
+            test: /\.ts$/,
+            loader: 'awesome-typescript',
+            exclude: /node_modules/,
           },
           {
             test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)(\?v=\d+\.\d+\.\d+)?$/,
@@ -59,7 +64,7 @@ module.exports = function(config) {
     },
 
     webpackServer: {
-      noInfo: true,
+      quiet: true,
     },
 
     reporters: ['mocha', 'coverage'],
@@ -77,7 +82,7 @@ module.exports = function(config) {
 
     autoWatch: true,
 
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
     singleRun: false,
 
@@ -86,7 +91,7 @@ module.exports = function(config) {
       'karma-mocha',
       'karma-mocha-reporter',
       'karma-chai',
-      'karma-phantomjs-launcher',
+      'karma-chrome-launcher',
       'karma-coverage',
       'karma-sourcemap-loader',
     ],

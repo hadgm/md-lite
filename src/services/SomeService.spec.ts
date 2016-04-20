@@ -1,4 +1,5 @@
-import SomeService from './SomeService.js';
+import {expect} from  'chai';
+import {SomeService} from './SomeService.ts';
 
 describe('SomeService', function() {
   let service;
@@ -11,12 +12,8 @@ describe('SomeService', function() {
     service = new SomeService($log, _$http_, _$q_);
   }));
 
-  beforeEach(done => {
-    done();
-  });
-
   it('should say its name', () => {
-    expect(service.getName()).to.equal('SomeService.js');
+    expect(service.getName()).to.equal('SomeService');
   });
 
   it('should set name', () => {
